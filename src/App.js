@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+
 
 function App() {
+  const changeHandler=(e)=>{
+    console.log(e.target.files[0])
+    var objectURL = URL.createObjectURL(e.target.files[0]);
+    console.log(objectURL)
+    setCount(objectURL)
+  }
+  const [count, setCount] = useState(0);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <input onChange={(e)=>changeHandler(e)} multiple type="file" accept="video/*" />
+      </form>
+      <video controls autoPlay src={count}/>
     </div>
   );
 }
